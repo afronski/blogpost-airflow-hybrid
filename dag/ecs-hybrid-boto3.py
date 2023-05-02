@@ -54,7 +54,7 @@ def create_task(ti):
                     "options": {
                         "awslogs-group": "/ecs/hybrid-airflow",
                         "awslogs-region": "eu-central-1",
-                        "awslogs-stream-prefix": "ecs"
+                        "awslogs-stream-prefix": "ecs/airflow-hybrid-boto3"
                     }
                 }
             }

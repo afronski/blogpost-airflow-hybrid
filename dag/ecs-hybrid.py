@@ -106,7 +106,7 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
             ]
         },
         awslogs_group="/ecs/hybrid-airflow",
-        awslogs_stream_prefix="ecs",
+        awslogs_stream_prefix="ecs/airflow-hybrid-demo",
     )
 
     create_taskdef >> cloudquery 
