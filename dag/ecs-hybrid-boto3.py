@@ -59,8 +59,8 @@ def create_task(ti):
                 }
             }
         ],
-        taskRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
-        executionRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
+        taskRoleArn="arn:aws:iam::174191956299:role/ecs-anywhere-taskdef-hybridairflowApacheAirflowTas-ER38O4VR7EL8",
+        executionRoleArn="arn:aws:iam::174191956299:role/ecs-anywhere-taskdef-hybridairflowApacheAirflowTas-ER38O4VR7EL8",
         family="test-external",
         networkMode="bridge",
         requiresCompatibilities=["EXTERNAL"],
