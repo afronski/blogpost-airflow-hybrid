@@ -39,7 +39,7 @@ def create_task(ti):
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
-                        "awslogs-group": "/ecs/hybrid-airflow-cluster",
+                        "awslogs-group": "/ecs/hybrid-airflow",
                         "awslogs-region": "eu-central-1",
                         "awslogs-stream-prefix": "ecs"
                     }
@@ -77,7 +77,7 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
         task_definition="test-external",
         overrides={},
         launch_type="EC2",
-        awslogs_group="/ecs/hybrid-airflow-cluster",
+        awslogs_group="/ecs/hybrid-airflow",
         awslogs_stream_prefix="ecs"
     )
 
@@ -105,7 +105,7 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
                 }
             ]
         },
-        awslogs_group="/ecs/hybrid-airflow-cluster",
+        awslogs_group="/ecs/hybrid-airflow",
         awslogs_stream_prefix="ecs",
     )
 

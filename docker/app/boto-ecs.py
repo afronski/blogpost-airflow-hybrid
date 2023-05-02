@@ -22,7 +22,7 @@ response = client.register_task_definition(
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/hybrid-airflow-cluster",
+                    "awslogs-group": "/ecs/hybrid-airflow",
                     "awslogs-region": "eu-central-1",
                     "awslogs-stream-prefix": "ecs"
                 }
