@@ -19,7 +19,7 @@ def create_task():
                 "environment": [],
                 "mountPoints": [],
                 "volumesFrom": [],
-                "command": ["wgawronski-airflow-hybrid-demo","period1/temp.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1"],
+                "command": ["wgawronski-airflow-hybrid-demo","period1/temp.csv", "select * from customers WHERE country = \"Germany\"", "rds-airflow-hybrid","eu-central-1"],
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {

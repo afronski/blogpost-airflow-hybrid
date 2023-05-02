@@ -32,7 +32,7 @@ def create_task(ti):
                 "command": [
                     "wgawronski-airflow-hybrid-demo",
                     "period1/hq-data.csv",
-                    "select * from customers WHERE location = \"Germany\"",
+                    "select * from customers WHERE country = \"Germany\"",
                     "rds-airflow-hybrid",
                     "eu-central-1"
                 ],
@@ -41,7 +41,7 @@ def create_task(ti):
                     "options": {
                         "awslogs-group": "/ecs/hybrid-airflow",
                         "awslogs-region": "eu-central-1",
-                        "awslogs-stream-prefix": "ecs/airflow-hybrid-demo"
+                        "awslogs-stream-prefix": "ecs"
                     }
                 }
             }
@@ -82,8 +82,8 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
     )
 
     # switch between these to change between remote and local MySQL
-    # "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1" ]}
-    # "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
+    # "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from customers WHERE country = \"Germany\"", "rds-airflow-hybrid","eu-central-1" ]}
+    # "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from customers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
 
     remotequery = ECSOperator(
         task_id="remotequery",
@@ -98,7 +98,7 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
                     "command" : [
                         "wgawronski-airflow-hybrid-demo",
                         "period1/region-data.csv",
-                        "select * from regionalcustomers WHERE country = \"Germany\"",
+                        "select * from customers WHERE country = \"Germany\"",
                         "localmysql-airflow-hybrid",
                         "eu-central-1"
                     ]

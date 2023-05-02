@@ -45,7 +45,7 @@ def create_task(ti):
                 "command": [
                     "wgawronski-airflow-hybrid-demo",
                     "period1/temp.csv",
-                    "select * from customers WHERE location = \"Germany\"",
+                    "select * from customers WHERE country = \"Germany\"",
                     "rds-airflow-hybrid",
                     "eu-central-1"
                 ],
@@ -54,7 +54,7 @@ def create_task(ti):
                     "options": {
                         "awslogs-group": "/ecs/hybrid-airflow",
                         "awslogs-region": "eu-central-1",
-                        "awslogs-stream-prefix": "ecs/airflow-hybrid-boto3"
+                        "awslogs-stream-prefix": "ecs"
                     }
                 }
             }
