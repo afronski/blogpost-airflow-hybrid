@@ -3,7 +3,7 @@
 #!/usr/bin/env python3
 
 #from aws_cdk import core
-import aws_cdk as cdk 
+import aws_cdk as cdk
 
 from ecs_anywhere.ecs_anywhere_vpc import EcsAnywhereVPCStack
 from ecs_anywhere.ecs_anywhere_taskdef import EcsAnywhereTaskDefStack
@@ -15,7 +15,7 @@ props = {
     'ecr-repo': 'hybrid-airflow',
     'image-tag' : 'airflw-amd64',
     'awsvpccidr':'10.0.0.0/16',
-    's3':'wgawronski-hybrid-airflow'
+    's3':'wgawronski-airflow-hybrid-demo'
     }
 
 app = cdk.App()

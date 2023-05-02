@@ -15,8 +15,8 @@ with DAG('hybrid_airflow_external_dag', catchup=False, default_args=default_args
         task_id="remotequery",
         dag=dag,
         cluster="hybrid-airflow-cluster",
-        task_definition="apache-airflow",
-        overrides={ },
+        task_definition="demo-hybrid-airflow",
+        overrides={},
         launch_type="EXTERNAL",
         awslogs_group="/ecs/hybrid-airflow",
         awslogs_stream_prefix="ecs/Hybrid-ELT-TaskDef"

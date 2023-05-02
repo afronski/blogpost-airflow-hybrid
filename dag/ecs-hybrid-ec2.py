@@ -15,8 +15,8 @@ with DAG('hybrid_airflow_ec2_dag', catchup=False, default_args=default_args, sch
         task_id="cloudquery",
         dag=dag,
         cluster="hybrid-airflow-cluster",
-        task_definition="apache-airflow",
-        overrides={ },
+        task_definition="demo-hybrid-airflow",
+        overrides={},
         launch_type="EC2",
         awslogs_group="/ecs/hybrid-airflow",
         awslogs_stream_prefix="ecs/Hybrid-ELT-TaskDef"

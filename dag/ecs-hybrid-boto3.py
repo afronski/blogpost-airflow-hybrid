@@ -42,7 +42,13 @@ def create_task(ti):
                 "environment": [],
                 "mountPoints": [],
                 "volumesFrom": [],
-                "command": ["ricsue-airflow-hybrid","period1/temp.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1"],
+                "command": [
+                    "wgawronski-airflow-hybrid-demo",
+                    "period1/temp.csv",
+                    "select * from customers WHERE location = \"Germany\"",
+                    "rds-airflow-hybrid",
+                    "eu-central-1"
+                ],
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
@@ -53,17 +59,16 @@ def create_task(ti):
                 }
             }
         ],
-        taskRoleArn="arn:aws:iam::xxx:role/ecsTaskExecutionRole",
-        executionRoleArn="arn:aws:iam::xxxx:role/ecsTaskExecutionRole",
-        family= "test-external",
+        taskRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
+        executionRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
+        family="test-external",
         networkMode="bridge",
-        requiresCompatibilities= [
-            "EXTERNAL"
-        ],
-        cpu= "256",
-        memory= "512") 
+        requiresCompatibilities=["EXTERNAL"],
+        cpu="256",
+        memory="512"
+    )
 
-        # we now need to store the version of the new task so we can ensure idemopotency
+    # we now need to store the version of the new task so we can ensure idemopotency
 
     new_taskdef=json.dumps(response['taskDefinition']['revision'], indent=4, default=str)
     print("TaskDef is now at :" + str(new_taskdef))

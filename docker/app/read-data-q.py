@@ -83,9 +83,9 @@ if __name__ == '__main__':
 
     # demo command to test this from the cli
     # for Cloud based MySQL
-    # python app/read-data-q.py ricsue-airflow-hybrid period1/temp.csv "select * from customers WHERE location = 'Germany' AND (date BETWEEN '2022-01-01 14:15:55' AND '2022-09-29 10:15:55')" rds-airflow-hybrid eu-central-1
+    # python app/read-data-q.py wgawronski-airflow-hybrid-demo period1/temp.csv "select * from customers WHERE location = 'Germany' AND (date BETWEEN '2022-01-01 14:15:55' AND '2022-09-29 10:15:55')" rds-airflow-hybrid eu-central-1
     # for local/remote based MySQL
-    # python app/read-data-q.py ricsue-airflow-hybrid period1/temp2.csv "select * from customers WHERE location = 'Germany' AND (date BETWEEN '2022-01-01 14:15:55' AND '2022-09-29 10:15:55')" localmysql-airflow-hybrid eu-central-1
+    # python app/read-data-q.py wgawronski-airflow-hybrid-demo period1/temp2.csv "select * from customers WHERE location = 'Germany' AND (date BETWEEN '2022-01-01 14:15:55' AND '2022-09-29 10:15:55')" localmysql-airflow-hybrid eu-central-1
     # other queries you can try, for example 
     # "select * from customers WHERE location = '{country}' AND (date BETWEEN '{start}' AND '{end}')".format(country=country,start=start,end=end)
 

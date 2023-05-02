@@ -15,12 +15,21 @@ with DAG('hybrid_airflow_local_dag', catchup=False, default_args=default_args, s
         task_id="localquery",
         dag=dag,
         cluster="hybrid-airflow-cluster",
-        task_definition="apache-airflow",
-        overrides={ "containerOverrides": [
-            { 
-                "name": "Hybrid-ELT-TaskDef",
-                "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from customers WHERE country = \"Germany\"", "mydc-airflow-hybrid","eu-central-1" ]}
-            ] },
+        task_definition="demo-hybrid-airflow",
+        overrides={
+            "containerOverrides": [
+                {
+                    "name": "Hybrid-ELT-TaskDef",
+                    "command": [
+                        "wgawronski-airflow-hybrid-demo",
+                        "period1/region-data.csv",
+                        "select * from customers WHERE country = \"Germany\"",
+                        "localmysql-airflow-hybrid",
+                        "eu-central-1"
+                    ]
+                }
+            ]
+        },
         launch_type="EXTERNAL",
         awslogs_group="/ecs/hybrid-airflow",
         awslogs_stream_prefix="ecs/Hybrid-ELT-TaskDef"

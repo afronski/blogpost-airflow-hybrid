@@ -29,7 +29,13 @@ def create_task(ti):
                 "environment": [],
                 "mountPoints": [],
                 "volumesFrom": [],
-                "command": ["ricsue-airflow-hybrid","period1/hq-data.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1"],
+                "command": [
+                    "wgawronski-airflow-hybrid-demo",
+                    "period1/hq-data.csv",
+                    "select * from customers WHERE location = \"Germany\"",
+                    "rds-airflow-hybrid",
+                    "eu-central-1"
+                ],
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
@@ -40,17 +46,16 @@ def create_task(ti):
                 }
             }
         ],
-        taskRoleArn="arn:aws:iam::xx:role/ecsTaskExecutionRole",
-        executionRoleArn="arn:aws:iam::xx:role/ecsTaskExecutionRole",
+        taskRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
+        executionRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
         family= "test-external",
         networkMode="host",
-        requiresCompatibilities= [
-            "EXTERNAL"
-        ],
-        cpu= "256",
-        memory= "512") 
+        requiresCompatibilities=["EXTERNAL"],
+        cpu="256",
+        memory="512"
+    )
 
-        # we now need to store the version of the new task so we can ensure idemopotency
+    # we now need to store the version of the new task so we can ensure idemopotency
 
     new_taskdef=json.dumps(response['taskDefinition']['revision'], indent=4, default=str)
     print("TaskDef is now at :" + str(new_taskdef))
@@ -77,8 +82,8 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
     )
 
     # switch between these to change between remote and local MySQL
-    # "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1" ]}
-    # "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
+    # "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1" ]}
+    # "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
 
     remotequery = ECSOperator(
         task_id="remotequery",
@@ -89,7 +94,7 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
         overrides={ "containerOverrides": [
             { 
                 "name": "airflow-hybrid-demo",
-                "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
+                "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
             ] },
         awslogs_group="/ecs/test-external",
         awslogs_stream_prefix="ecs",

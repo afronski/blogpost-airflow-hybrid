@@ -154,7 +154,7 @@ class EcsAnywhereTaskDefStack(Stack):
             # Configure CloudWatch logging
             logging=ecs.LogDrivers.aws_logs(stream_prefix="ecs",log_group=log_group),
             essential=True,
-            command= [ "wgawronski-hybrid-airflow", "hybrid/hq-data.csv", "select * from customers WHERE country = \"Germany\"", "rds-airflow-hybrid", "eu-central-1" ],
+            command= [ "wgawronski-airflow-hybrid-demo", "hybrid/hq-data.csv", "select * from customers WHERE country = \"Germany\"", "rds-airflow-hybrid", "eu-central-1" ],
             )
 
         CfnOutput(
