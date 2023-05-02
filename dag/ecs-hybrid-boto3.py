@@ -27,7 +27,7 @@ default_args = {
 #cluster
 
 
-client = boto3.client("ecs", region_name="eu-west-2")
+client = boto3.client("ecs", region_name="eu-central-1")
 
 # Function that will take variables and create our new ECS Task Definition
 def create_task(ti):
@@ -42,12 +42,12 @@ def create_task(ti):
                 "environment": [],
                 "mountPoints": [],
                 "volumesFrom": [],
-                "command": ["ricsue-airflow-hybrid","period1/temp.csv", "select * from customers WHERE location = \"Spain\"", "rds-airflow-hybrid","eu-west-2"],
+                "command": ["ricsue-airflow-hybrid","period1/temp.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1"],
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
                         "awslogs-group": "/ecs/test-external",
-                        "awslogs-region": "eu-west-2",
+                        "awslogs-region": "eu-central-1",
                         "awslogs-stream-prefix": "ecs"
                     }
                 }

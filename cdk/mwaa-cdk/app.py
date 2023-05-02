@@ -7,8 +7,8 @@ import aws_cdk as cdk
 from mwaa_cdk.mwaa_cdk_backend import MwaaCdkStackBackend
 from mwaa_cdk.mwaa_cdk_env import MwaaCdkStackEnv
 
-env_EU=cdk.Environment(region="eu-central-1", account="704533066374")
-mwaa_props = {'dagss3location': '094459-airflow-hybrid-demo','mwaa_env' : 'mwaa-hybrid-demo'}
+env_EU=cdk.Environment()
+mwaa_props = {'dagss3location': 'wgawronski-airflow-hybrid-demo','mwaa_env' : 'mwaa-hybrid-demo'}
 
 app = cdk.App()
 

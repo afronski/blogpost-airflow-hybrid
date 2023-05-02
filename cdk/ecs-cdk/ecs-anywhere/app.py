@@ -8,14 +8,14 @@ import aws_cdk as cdk
 from ecs_anywhere.ecs_anywhere_vpc import EcsAnywhereVPCStack
 from ecs_anywhere.ecs_anywhere_taskdef import EcsAnywhereTaskDefStack
 
-env_EU=cdk.Environment(region="eu-west-2", account="704533066374")
+env_EU=cdk.Environment()
 props = {
     'ecsclustername':'hybrid-airflow',
     'ecstaskdef':'demo-hybrid-airflow',
     'ecr-repo': 'hybrid-airflow',
     'image-tag' : 'airflw-amd64',
     'awsvpccidr':'10.0.0.0/16',
-    's3':'094459-hybrid-airflow'
+    's3':'wgawronski-hybrid-airflow'
     }
 
 app = cdk.App()

@@ -5,7 +5,7 @@ import json
 def get_secret():
 
     secret_name = "rds-airflow-hybrid"
-    region_name = "eu-west-2"
+    region_name = "eu-central-1"
 
     # Create a Secrets Manager client
     session = boto3.session.Session()

@@ -154,7 +154,7 @@ class EcsAnywhereTaskDefStack(Stack):
             # Configure CloudWatch logging
             logging=ecs.LogDrivers.aws_logs(stream_prefix="ecs",log_group=log_group),
             essential=True,
-            command= [ "094459-hybrid-airflow", "hybrid/hq-data.csv", "select * from customers WHERE country = \"Romania\"", "rds-airflow-hybrid", "eu-west-2" ],
+            command= [ "wgawronski-hybrid-airflow", "hybrid/hq-data.csv", "select * from customers WHERE country = \"Germany\"", "rds-airflow-hybrid", "eu-central-1" ],
             )
 
         CfnOutput(
@@ -175,8 +175,3 @@ class EcsAnywhereTaskDefStack(Stack):
             value=external_task_def_policy_document_role.role_name,
             description="Name of ECS Role created"
         )
-
-
-
-        
-        

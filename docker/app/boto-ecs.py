@@ -3,7 +3,7 @@ import json
 
 # Thanks to https://hands-on.cloud/working-with-ecs-in-python-using-boto3/ for a good cheatsheet 
 
-client = boto3.client("ecs", region_name="eu-west-2")
+client = boto3.client("ecs", region_name="eu-central-1")
 
 ## create a new task in ecs
 
@@ -18,20 +18,19 @@ response = client.register_task_definition(
                 "environment": [],
                 "mountPoints": [],
                 "volumesFrom": [],
-                "command": ["ricsue-airflow-hybrid","period1/temp.csv", "select * from customers WHERE location = \"China\"", "rds-airflow-hybrid","eu-west-2"],
+                "command": ["ricsue-airflow-hybrid","period1/temp.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1"],
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
                         "awslogs-group": "/ecs/test-external",
-                        "awslogs-region": "eu-west-2",
+                        "awslogs-region": "eu-central-1",
                         "awslogs-stream-prefix": "ecs"
                     }
                 }
             }
         ],
-        taskRoleArn="arn:aws:iam::704533066374:role/ecsTaskExecutionRole",
-        #taskDefinitionArn="arn:aws:ecs:eu-west-2:704533066374:task-definition/test-external:5",
-        executionRoleArn="arn:aws:iam::704533066374:role/ecsTaskExecutionRole",
+        taskRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
+        executionRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
         family= "test-external",
         networkMode="bridge",
         requiresCompatibilities= [

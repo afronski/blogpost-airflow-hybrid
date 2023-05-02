@@ -5,8 +5,8 @@
 # if you are using this script together to deploy
 # the multi-arch demo
 
-AWS_DEFAULT_REGION=eu-west-2
-AWS_ACCOUNT=704533066374
+AWS_DEFAULT_REGION=eu-central-1
+AWS_ACCOUNT=174191956299
 AWS_ECR_REPO=hybrid-airflow
 COMMIT_HASH="airflw"
 

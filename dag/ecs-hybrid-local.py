@@ -19,7 +19,7 @@ with DAG('hybrid_airflow_local_dag', catchup=False, default_args=default_args, s
         overrides={ "containerOverrides": [
             { 
                 "name": "Hybrid-ELT-TaskDef",
-                "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from customers WHERE country = \"Spain\"", "mydc-airflow-hybrid","eu-west-2" ]} 
+                "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from customers WHERE country = \"Germany\"", "mydc-airflow-hybrid","eu-central-1" ]}
             ] },
         launch_type="EXTERNAL",
         awslogs_group="/ecs/hybrid-airflow",

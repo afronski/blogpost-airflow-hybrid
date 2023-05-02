@@ -17,7 +17,7 @@ default_args = {
 
 # Function that will take variables and create our new ECS Task Definition
 def create_task(ti):
-    client = boto3.client("ecs", region_name="eu-west-2")
+    client = boto3.client("ecs", region_name="eu-central-1")
     response = client.register_task_definition(
         containerDefinitions=[
             {
@@ -29,12 +29,12 @@ def create_task(ti):
                 "environment": [],
                 "mountPoints": [],
                 "volumesFrom": [],
-                "command": ["ricsue-airflow-hybrid","period1/hq-data.csv", "select * from customers WHERE location = \"Spain\"", "rds-airflow-hybrid","eu-west-2"],
+                "command": ["ricsue-airflow-hybrid","period1/hq-data.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1"],
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
                         "awslogs-group": "/ecs/test-external",
-                        "awslogs-region": "eu-west-2",
+                        "awslogs-region": "eu-central-1",
                         "awslogs-stream-prefix": "ecs"
                     }
                 }
@@ -77,8 +77,8 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
     )
 
     # switch between these to change between remote and local MySQL
-    # "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from customers WHERE location = \"Poland\"", "rds-airflow-hybrid","eu-west-2" ]} 
-    # "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Poland\"", "localmysql-airflow-hybrid","eu-west-2" ]} 
+    # "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from customers WHERE location = \"Germany\"", "rds-airflow-hybrid","eu-central-1" ]}
+    # "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
 
     remotequery = ECSOperator(
         task_id="remotequery",
@@ -89,7 +89,7 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
         overrides={ "containerOverrides": [
             { 
                 "name": "airflow-hybrid-demo",
-                "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Poland\"", "localmysql-airflow-hybrid","eu-west-2" ]} 
+                "command" : [ "ricsue-airflow-hybrid","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
             ] },
         awslogs_group="/ecs/test-external",
         awslogs_stream_prefix="ecs",
