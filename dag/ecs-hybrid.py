@@ -41,7 +41,7 @@ def create_task(ti):
                     "options": {
                         "awslogs-group": "/ecs/hybrid-airflow",
                         "awslogs-region": "eu-central-1",
-                        "awslogs-stream-prefix": "ecs"
+                        "awslogs-stream-prefix": "ecs/airflow-hybrid-demo"
                     }
                 }
             }
@@ -78,7 +78,7 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
         overrides={},
         launch_type="EC2",
         awslogs_group="/ecs/hybrid-airflow",
-        awslogs_stream_prefix="ecs"
+        awslogs_stream_prefix="ecs/airflow-hybrid-demo"
     )
 
     # switch between these to change between remote and local MySQL
