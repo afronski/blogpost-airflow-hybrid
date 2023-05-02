@@ -35,7 +35,7 @@ def create_task(ti):
         containerDefinitions=[
             {
                 "name": "airflow-hybrid-boto3",
-                "image": "public.ecr.aws/xxx/xxx:latest",
+                "image": "174191956299.dkr.ecr.eu-central-1.amazonaws.com/hybrid-airflow:airflw",
                 "cpu": 0,
                 "portMappings": [],
                 "essential": True,
@@ -80,7 +80,7 @@ def run_task(ti):
     new_taskdef=ti.xcom_pull(task_ids=['create_taskdef'][0])
     print("TaskDef passed is :" + str(new_taskdef))
     response2 = client.run_task(
-        cluster='test-hybrid',
+        cluster='hybrid-airflow-cluster',
         count=1,
         launchType='EXTERNAL',
         taskDefinition='test-external:{taskdef}'.format(taskdef=new_taskdef)

@@ -22,7 +22,7 @@ def create_task(ti):
         containerDefinitions=[
             {
                 "name": "airflow-hybrid-demo",
-                "image": "public.ecr.aws/xx/xx:latest",
+                "image": "174191956299.dkr.ecr.eu-central-1.amazonaws.com/hybrid-airflow:airflw",
                 "cpu": 0,
                 "portMappings": [],
                 "essential": True,
@@ -48,7 +48,7 @@ def create_task(ti):
         ],
         taskRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
         executionRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
-        family= "test-external",
+        family="test-external",
         networkMode="host",
         requiresCompatibilities=["EXTERNAL"],
         cpu="256",
@@ -73,9 +73,9 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
     cloudquery = ECSOperator(
         task_id="cloudquery",
         dag=dag,
-        cluster="test-hybrid",
+        cluster="hybrid-airflow-cluster",
         task_definition="test-external",
-        overrides={ },
+        overrides={},
         launch_type="EC2",
         awslogs_group="/ecs/test-external",
         awslogs_stream_prefix="ecs"
@@ -88,14 +88,23 @@ with DAG('hybrid_airflow_dag_test', catchup=False, default_args=default_args, sc
     remotequery = ECSOperator(
         task_id="remotequery",
         dag=dag,
-        cluster="test-hybrid",
+        cluster="hybrid-airflow-cluster",
         task_definition="test-external",
         launch_type="EXTERNAL",
-        overrides={ "containerOverrides": [
-            { 
-                "name": "airflow-hybrid-demo",
-                "command" : [ "wgawronski-airflow-hybrid-demo","period1/region-data.csv", "select * from regionalcustomers WHERE country = \"Germany\"", "localmysql-airflow-hybrid","eu-central-1" ]}
-            ] },
+        overrides={
+            "containerOverrides": [
+                {
+                    "name": "airflow-hybrid-demo",
+                    "command" : [
+                        "wgawronski-airflow-hybrid-demo",
+                        "period1/region-data.csv",
+                        "select * from regionalcustomers WHERE country = \"Germany\"",
+                        "localmysql-airflow-hybrid",
+                        "eu-central-1"
+                    ]
+                }
+            ]
+        },
         awslogs_group="/ecs/test-external",
         awslogs_stream_prefix="ecs",
     )
