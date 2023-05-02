@@ -52,7 +52,7 @@ def create_task(ti):
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
-                        "awslogs-group": "/ecs/test-external",
+                        "awslogs-group": "/ecs/hybrid-airflow-cluster",
                         "awslogs-region": "eu-central-1",
                         "awslogs-stream-prefix": "ecs"
                     }

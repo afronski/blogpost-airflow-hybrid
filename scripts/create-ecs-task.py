@@ -23,19 +23,18 @@ def create_task():
                 "logConfiguration": {
                     "logDriver": "awslogs",
                     "options": {
-                        "awslogs-group": "/ecs/test-external",
+                        "awslogs-group": "/ecs/hybrid-airflow-cluster",
                         "awslogs-region": "eu-central-1",
                         "awslogs-stream-prefix": "ecs"
                     }
                 }
             }
         ],
-        taskRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
-        executionRoleArn="arn:aws:iam::174191956299:role/ecsTaskExecutionRole",
-        family= "test-external",
+        taskRoleArn="arn:aws:iam::174191956299:role/ecs-anywhere-taskdef-hybridairflowApacheAirflowTas-ER38O4VR7EL8",
+        executionRoleArn="arn:aws:iam::174191956299:role/ecs-anywhere-taskdef-hybridairflowApacheAirflowTas-ER38O4VR7EL8",
+        family="test-external",
         networkMode="HOST",
-        requiresCompatibilities= [
-            "EXTERNAL"
-        ],
-        cpu= "256",
-        memory= "512") 
+        requiresCompatibilities=["EXTERNAL"],
+        cpu="256",
+        memory="512"
+    )
